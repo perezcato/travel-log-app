@@ -3,9 +3,23 @@ import util from 'util';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import cors from 'cors';
+import mongoose from 'mongoose';
+
+import { notFoundError, errorHandler } from './handler.js';
 
 const debug = util.debuglog('travel_app');
 const app = express();
+
+mongoose.connect('mongodb://localhost/travellog', { useNewUrlParser: true });
+
+const db = mongoose.connection;
+
+db.on('error', () => {
+  debug('Something went wrong');
+});
+db.on('success', () => {
+  debug('Database Connected');
+});
 
 app.use(morgan('combined'));
 app.use(helmet());
@@ -14,22 +28,10 @@ app.use(cors({
 }));
 
 
-app.use((req, res, next) => {
-  const error = new Error(`Not Found - ${req.originalUrl}`);
-  res.status(400);
-  next(error);
-});
+app.use(notFoundError);
+app.use(errorHandler);
 
-app.use((error, req, res, next) => {
-  const statusCode = req.statusCode === 200 ? 500 : req.statusCode;
-  res.status(statusCode);
-  res.json({
-    message: error.message,
-    stack: error.stack,
-  });
-});
-
-const port = process.env.PORT || 1337;
+const port = process.env.PORT || 4000;
 app.listen(port, () => {
   debug('Application is running');
 });

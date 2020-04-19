@@ -15,5 +15,12 @@
         "sourceType": "module"
     },
     "rules": {
+        "import/extensions": [
+            0,
+            "never",
+            {
+                "js": "never"
+            }
+        ]
     }
 }
