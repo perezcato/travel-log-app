@@ -1,0 +1,27 @@
+{
+  "name": "travel-log-app",
+  "version": "1.0.0",
+  "description": "A travel log app for keeping your travel logs",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_DEBUG=travel_app node src/index.js",
+    "dev": "NODE_DEBUG=travel_app nodemon src/index.js",
+    "lint": "eslint src/"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "helmet": "^3.22.0",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "nodemon": "^2.0.3"
+  }
+}
