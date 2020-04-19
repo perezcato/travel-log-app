@@ -1,4 +1,6 @@
-import { Schema } from 'mongoose';
+import mongoose from 'mongoose';
+
+const Schema = mongoose.Schema;
 
 const logEntry = new Schema({
   title: {
@@ -26,10 +28,14 @@ const logEntry = new Schema({
     min: -179.999999999,
     max: 179.99999999999,
   },
-  visitData: {
+  visitDate: {
     type: Date,
     required: true,
   },
 }, {
   timestamps: true,
 });
+
+const LogEntry = mongoose.model('LogEntry', logEntry);
+
+export default LogEntry;

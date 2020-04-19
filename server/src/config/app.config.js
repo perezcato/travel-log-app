@@ -1,3 +1,4 @@
+import express from 'express';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import cors from 'cors';
@@ -22,6 +23,8 @@ const appConfig = (app) => {
   db.on('success', () => {
     debug('Database Connected');
   });
+
+  app.use(express.json());
   app.use(morgan('combined'));
   app.use(helmet());
   app.use(cors({
