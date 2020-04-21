@@ -11,6 +11,7 @@ router.get('/', async (req, res, next) => {
     const logs = await LogEntry.find();
     res.json(logs);
   } catch (e) {
+    res.status(500);
     next(e);
   }
 });
